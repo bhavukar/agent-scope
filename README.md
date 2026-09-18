@@ -1,4 +1,4 @@
-# 🔍 Agent-Scope
+#  Agent-Scope
 
 > **Visual Live Time-Travel Debugger & Execution DAG Inspector for Model Context Protocol (MCP) & Autonomous AI Agents.**
 
@@ -8,7 +8,7 @@
 
 ---
 
-## ⚡ What is Agent-Scope?
+##  What is Agent-Scope?
 
 Debugging autonomous AI agents and Model Context Protocol (MCP) tool chains is notoriously hard. When an agent hallucinates, loops in circular queries, or exceeds token budgets, inspecting static log files gives you zero visibility into the **causal decision tree**.
 
@@ -33,17 +33,17 @@ flowchart TD
 
 ---
 
-## ✨ Core Features
+##  Core Features
 
-- ⏳ **Deterministic Time-Travel Replay**: Drag the scrubber slider to step backwards and forwards through the agent's decision tree step-by-step.
-- 📊 **Sub-Millisecond Span Latency Waterfall**: Trace exact execution time per tool call and identify slow database or network bottlenecks.
-- 🪙 **Token Cost & Context Footprint**: Inspect granular prompt vs. completion token consumption at every hop.
-- 🔌 **Zero-Config MCP Integration**: Wrap any standard MCP stdio or SSE server with zero code changes.
-- 💻 **Real-Time Interactive DAG Studio**: Built-in responsive web dashboard with live SVG node connectors and JSON payload inspection drawers.
+-  **Deterministic Time-Travel Replay**: Drag the scrubber slider to step backwards and forwards through the agent's decision tree step-by-step.
+-  **Sub-Millisecond Span Latency Waterfall**: Trace exact execution time per tool call and identify slow database or network bottlenecks.
+-  **Token Cost & Context Footprint**: Inspect granular prompt vs. completion token consumption at every hop.
+-  **Zero-Config MCP Integration**: Wrap any standard MCP stdio or SSE server with zero code changes.
+-  **Real-Time Interactive DAG Studio**: Built-in responsive web dashboard with live SVG node connectors and JSON payload inspection drawers.
 
 ---
 
-## 🚀 Quickstart
+##  Quickstart
 
 ### 1. Launch the Visual Inspector
 ```bash
@@ -85,7 +85,7 @@ const result = await scope.wrapToolCall(
 
 ---
 
-## 🌐 Interactive Web Landing Page
+##  Interactive Web Landing Page
 
 The project includes an interactive web demo inspired by editorial typography and minimal high-contrast design (`ryanritzenthaler.com`).
 
@@ -97,6 +97,6 @@ npx serve web
 
 ---
 
-## 📜 License
+##  License
 
 MIT License © 2026 Bhavuk Arora

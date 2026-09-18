@@ -53,7 +53,7 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             </button>
           </div>
-          <a href="#studio" class="btn-primary">Open Live Studio ↓</a>
+          <a href="#studio" class="btn-primary">Open Live Studio</a>
         </div>
       </div>
     </section>
@@ -62,27 +62,27 @@
     <div class="marquee-strip">
       <div class="marquee-track">
         <span>LIVE EXECUTION DAG</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>TIME-TRAVEL REPLAY</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>TOKEN WATERFALL METRICS</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>MCP NATIVE</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>ZERO TELEMETRY OVERHEAD</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>CAUSAL TOOL TRACING</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>SUB-MILLISECOND SPAN TRACKING</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>LIVE EXECUTION DAG</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>TIME-TRAVEL REPLAY</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>TOKEN WATERFALL METRICS</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>MCP NATIVE</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
       </div>
     </div>
 
@@ -90,7 +90,6 @@
     <section id="studio" class="studio-section">
       <div class="studio-container">
         <div class="studio-header">
-          <div class="section-label">// INTERACTIVE DAG STUDIO</div>
           <h2 class="section-heading">Inspect Live Multi-Agent Execution Graphs</h2>
           <p class="section-desc">Select an agent scenario below, scrub the time-travel slider to replay execution steps, and click any node to inspect raw tool arguments, token footprints, and latency waterfalls.</p>
         </div>
@@ -98,24 +97,21 @@
         <!-- Scenario Selector Tabs -->
         <div class="scenario-selector">
           <button class="scenario-btn active" data-scenario="research">
-            <span class="scenario-icon">🌐</span>
             <div class="scenario-info">
               <span class="scenario-title">Multi-Hop Research Agent</span>
-              <span class="scenario-meta">Web Search ➔ Scraper ➔ Synthesizer (4 Spans)</span>
+              <span class="scenario-meta">Web Search -> Scraper -> Synthesizer (4 Spans)</span>
             </div>
           </button>
           <button class="scenario-btn" data-scenario="refactor">
-            <span class="scenario-icon">⚡</span>
             <div class="scenario-info">
               <span class="scenario-title">Codebase Refactor Loop</span>
-              <span class="scenario-meta">AST Grep ➔ Security Policy ➔ Patch ➔ Test (5 Spans)</span>
+              <span class="scenario-meta">AST Grep -> Security Policy -> Patch -> Test (5 Spans)</span>
             </div>
           </button>
           <button class="scenario-btn" data-scenario="resilience">
-            <span class="scenario-icon">🛡️</span>
             <div class="scenario-info">
               <span class="scenario-title">Resilient API Recovery</span>
-              <span class="scenario-meta">Timeout ➔ Exponential Backoff ➔ Fallback DB (4 Spans)</span>
+              <span class="scenario-meta">Timeout -> Exponential Backoff -> Fallback DB (4 Spans)</span>
             </div>
           </button>
         </div>
@@ -124,11 +120,11 @@
         <div class="studio-controls-bar">
           <div class="playback-controls">
             <button class="control-btn" id="btn-play-pause" title="Play / Pause Replay">
-              <span id="play-icon">▶</span>
+              <span id="play-icon">Play</span>
             </button>
-            <button class="control-btn" id="btn-step-prev" title="Step Backward">⏮</button>
-            <button class="control-btn" id="btn-step-next" title="Step Forward">⏭</button>
-            <button class="control-btn" id="btn-reset" title="Reset Timeline">↺</button>
+            <button class="control-btn" id="btn-step-prev" title="Step Backward">Prev</button>
+            <button class="control-btn" id="btn-step-next" title="Step Forward">Next</button>
+            <button class="control-btn" id="btn-reset" title="Reset Timeline">Reset</button>
           </div>
 
           <div class="timeline-scrubber-group">
@@ -227,7 +223,6 @@
     <!-- Features Section -->
     <section id="features" class="features-section">
       <div class="features-container">
-        <div class="section-label">// ARCHITECTURE & PERFORMANCE</div>
         <h2 class="section-heading">Engineered for Zero-Overhead Telemetry</h2>
         
         <div class="features-grid">
@@ -261,7 +256,6 @@
     <!-- Integration Section -->
     <section id="integration" class="integration-section">
       <div class="integration-container">
-        <div class="section-label">// QUICKSTART & CONFIGURATION</div>
         <h2 class="section-heading">Plug into Your AI Workflow</h2>
 
         <div class="config-tabs">
@@ -288,17 +282,17 @@ npx agent-scope --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</
     <div class="marquee-strip">
       <div class="marquee-track">
         <span>AGENT-SCOPE</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>OPEN SOURCE MIT LICENSE</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>BUILT FOR MCP & AUTONOMOUS AGENTS</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>ZERO OVERHEAD TELEMETRY</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>AGENT-SCOPE</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
         <span>OPEN SOURCE MIT LICENSE</span>
-        <span class="separator">✦</span>
+        <span class="separator">/</span>
       </div>
     </div>
   </main>
@@ -318,7 +312,7 @@ npx agent-scope --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Bhavuk Arora. Released under the MIT License.</span>
+      <span>(c) 2026 Bhavuk Arora. Released under the MIT License.</span>
     </div>
   </footer>
 

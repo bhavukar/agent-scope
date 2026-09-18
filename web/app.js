@@ -316,7 +316,7 @@ function setupPlayback() {
 
 function startPlayback() {
   isPlaying = true;
-  document.getElementById('play-icon').textContent = '⏸';
+  document.getElementById('play-icon').textContent = 'Pause';
   const maxSteps = SCENARIOS[currentScenarioKey].nodes.length;
   if (currentStep >= maxSteps) currentStep = 0;
 
@@ -333,7 +333,7 @@ function startPlayback() {
 
 function pausePlayback() {
   isPlaying = false;
-  document.getElementById('play-icon').textContent = '▶';
+  document.getElementById('play-icon').textContent = 'Play';
   if (playInterval) clearInterval(playInterval);
 }
 
@@ -569,14 +569,14 @@ const result = await scope.wrapToolCall('trace-session-101', 'execute_sql', { qu
 
 window.copyCli = function() {
   navigator.clipboard.writeText('npx agent-scope').then(() => {
-    alert('Copied "npx agent-scope" to clipboard!');
+    alert('Copied "npx agent-scope" to clipboard.');
   });
 };
 
 window.copyConfigCode = function() {
   const code = document.getElementById('config-code-content').textContent;
   navigator.clipboard.writeText(code).then(() => {
-    alert('Configuration copied to clipboard!');
+    alert('Configuration copied to clipboard.');
   });
 };
 
@@ -586,7 +586,7 @@ window.copyActivePayload = function(type) {
   if (node) {
     const data = type === 'input' ? node.input : node.output;
     navigator.clipboard.writeText(JSON.stringify(data, null, 2)).then(() => {
-      alert(`Copied ${type} JSON to clipboard!`);
+      alert(`Copied ${type} JSON to clipboard.`);
     });
   }
 };
