@@ -525,32 +525,32 @@ function setupConfigTabs() {
 
   const configs = {
     cli: `# 1. Install or launch directly via npx
-npx agent-scope
+npx spectra-trace
 
-# 2. Or attach to a running MCP server on custom port
-npx agent-scope --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"`,
+# 2. Or attach to a running tool server on custom port
+npx spectra-trace --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"`,
     claude: `// claude_desktop_config.json
 {
   "mcpServers": {
     "filesystem-scoped": {
-      "command": "agent-scope",
+      "command": "spectra-trace",
       "args": ["--port=4567", "--", "npx", "-y", "@modelcontextprotocol/server-filesystem", "/Users/me/Documents"]
     }
   }
-}`,
+} `,
     cursor: `// .cursor/mcp.json
 {
   "mcpServers": {
     "git-scoped": {
-      "command": "agent-scope",
+      "command": "spectra-trace",
       "args": ["--port=4567", "--", "npx", "-y", "@modelcontextprotocol/server-git", "."]
     }
   }
-}`,
-    sdk: `import { AgentTracer, createScopeTracerMiddleware } from 'agent-scope';
+} `,
+    sdk: `import { SpectraTracer, createSpectraMiddleware } from 'spectra-trace';
 
-const tracer = new AgentTracer();
-const scope = createScopeTracerMiddleware(tracer);
+const tracer = new SpectraTracer();
+const scope = createSpectraMiddleware(tracer);
 
 // Wrap any tool execution with automatic DAG span telemetry
 const result = await scope.wrapToolCall('trace-session-101', 'execute_sql', { query: 'SELECT * FROM users' }, async () => {
@@ -568,8 +568,8 @@ const result = await scope.wrapToolCall('trace-session-101', 'execute_sql', { qu
 }
 
 window.copyCli = function() {
-  navigator.clipboard.writeText('npx agent-scope').then(() => {
-    alert('Copied "npx agent-scope" to clipboard.');
+  navigator.clipboard.writeText('npx spectra-trace').then(() => {
+    alert('Copied "npx spectra-trace" to clipboard.');
   });
 };
 

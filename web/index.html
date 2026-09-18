@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent-Scope — Visual Live Time-Travel Debugger for MCP & AI Agents</title>
-  <meta name="description" content="Visual Live Time-Travel Debugger & DAG Inspector for Model Context Protocol (MCP) & Autonomous AI Agents." />
+  <title>Spectra — Visual Time-Travel Debugger & Causal DAG Tracing</title>
+  <meta name="description" content="Visual Live Time-Travel Debugger & Causal DAG Tracing Engine for AI Agent Tool Workflows." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,9 +16,9 @@
   <header class="site-header">
     <div class="nav-container">
       <div class="brand-group">
-        <img src="assets/logo.svg" alt="Agent-Scope Logo" class="brand-logo" />
+        <img src="assets/logo.svg" alt="Spectra Logo" class="brand-logo" />
         <div class="brand-text">
-          <span class="brand-name">AGENT-SCOPE</span>
+          <span class="brand-name">SPECTRA</span>
         </div>
       </div>
       <nav class="nav-links">
@@ -38,7 +38,7 @@
     <section class="hero-section">
       <div class="hero-container">
         <h1 class="hero-title">
-          Live Time-Travel Debugger for AI Agents & MCP Calls.
+          Live Time-Travel Debugger for AI Tool Workflows.
         </h1>
         
         <p class="hero-subtitle">
@@ -48,7 +48,7 @@
         <div class="hero-actions">
           <div class="cli-pill">
             <span class="cli-prefix">$</span>
-            <span class="cli-cmd">npx agent-scope</span>
+            <span class="cli-cmd">npx spectra-trace</span>
             <button class="copy-btn" onclick="copyCli()" title="Copy command">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             </button>
@@ -239,10 +239,10 @@
 
         <div class="config-code-box">
           <pre><code id="config-code-content"># 1. Install or launch directly via npx
-npx agent-scope
+npx spectra-trace
 
-# 2. Or attach to a running MCP server on custom port
-npx agent-scope --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</code></pre>
+# 2. Or attach to a running tool server on custom port
+npx spectra-trace --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</code></pre>
           <button class="copy-btn config-copy" onclick="copyConfigCode()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           </button>
@@ -256,8 +256,8 @@ npx agent-scope --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</
     <div class="footer-container">
       <div class="footer-brand">
         <img src="assets/logo.svg" alt="Logo" class="footer-logo" />
-        <span class="footer-brand-title">AGENT-SCOPE</span>
-        <p class="footer-copy">Visual Live Time-Travel Debugger for Model Context Protocol & AI Agents.</p>
+        <span class="footer-brand-title">SPECTRA</span>
+        <p class="footer-copy">Visual Live Time-Travel Debugger & Causal DAG Tracing Engine for AI Agent Tool Loops.</p>
       </div>
       <div class="footer-links">
         <a href="https://github.com/bhavukar/agent-scope" target="_blank" rel="noopener">GitHub Repository</a>
