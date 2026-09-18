@@ -1,0 +1,37 @@
+{
+  "name": "agent-scope",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Visual Live Time-Travel Debugger & DAG Inspector for Model Context Protocol (MCP) & AI Agents",
+  "main": "dist/index.js",
+  "bin": {
+    "agent-scope": "./bin/agent-scope.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "dev": "tsc -w"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-agent",
+    "debugger",
+    "time-travel",
+    "dag",
+    "telemetry",
+    "tracing",
+    "claude",
+    "cursor"
+  ],
+  "author": "Bhavuk Arora",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.4.0"
+  }
+}

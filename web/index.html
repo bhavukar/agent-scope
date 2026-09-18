@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent-Scope — Visual Live Time-Travel Debugger for MCP & AI Agents</title>
+  <meta name="description" content="Visual Live Time-Travel Debugger & DAG Inspector for Model Context Protocol (MCP) & Autonomous AI Agents." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=JetBrains+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Global Navigation -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="brand-group">
+        <img src="assets/logo.svg" alt="Agent-Scope Logo" class="brand-logo" />
+        <div class="brand-text">
+          <span class="brand-name">AGENT-SCOPE</span>
+          <span class="brand-badge">MCP TRACER V1.0</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#studio" class="nav-link">Live Studio</a>
+        <a href="#features" class="nav-link">Capabilities</a>
+        <a href="#integration" class="nav-link">Integration</a>
+        <a href="https://github.com/bhavukar/agent-scope" target="_blank" rel="noopener" class="btn-github">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="hero-tag">
+          <span class="pulse-dot"></span>
+          <span>SYSTEM TELEMETRY & EXECUTION DAG INSPECTOR</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Live Time-Travel Debugger for AI Agents & MCP Calls.
+        </h1>
+        
+        <p class="hero-subtitle">
+          Unpack every decision, tool call, latency spike, and prompt mutation in real-time. Full causal DAG graph visualization with deterministic step-by-step time-travel replay.
+        </p>
+
+        <div class="hero-actions">
+          <div class="cli-pill">
+            <span class="cli-prefix">$</span>
+            <span class="cli-cmd">npx agent-scope</span>
+            <button class="copy-btn" onclick="copyCli()" title="Copy command">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+          <a href="#studio" class="btn-primary">Open Live Studio ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee Ticker 1 -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span>LIVE EXECUTION DAG</span>
+        <span class="separator">✦</span>
+        <span>TIME-TRAVEL REPLAY</span>
+        <span class="separator">✦</span>
+        <span>TOKEN WATERFALL METRICS</span>
+        <span class="separator">✦</span>
+        <span>MCP NATIVE</span>
+        <span class="separator">✦</span>
+        <span>ZERO TELEMETRY OVERHEAD</span>
+        <span class="separator">✦</span>
+        <span>CAUSAL TOOL TRACING</span>
+        <span class="separator">✦</span>
+        <span>SUB-MILLISECOND SPAN TRACKING</span>
+        <span class="separator">✦</span>
+        <span>LIVE EXECUTION DAG</span>
+        <span class="separator">✦</span>
+        <span>TIME-TRAVEL REPLAY</span>
+        <span class="separator">✦</span>
+        <span>TOKEN WATERFALL METRICS</span>
+        <span class="separator">✦</span>
+        <span>MCP NATIVE</span>
+        <span class="separator">✦</span>
+      </div>
+    </div>
+
+    <!-- Live Interactive Studio Section -->
+    <section id="studio" class="studio-section">
+      <div class="studio-container">
+        <div class="studio-header">
+          <div class="section-label">// INTERACTIVE DAG STUDIO</div>
+          <h2 class="section-heading">Inspect Live Multi-Agent Execution Graphs</h2>
+          <p class="section-desc">Select an agent scenario below, scrub the time-travel slider to replay execution steps, and click any node to inspect raw tool arguments, token footprints, and latency waterfalls.</p>
+        </div>
+
+        <!-- Scenario Selector Tabs -->
+        <div class="scenario-selector">
+          <button class="scenario-btn active" data-scenario="research">
+            <span class="scenario-icon">🌐</span>
+            <div class="scenario-info">
+              <span class="scenario-title">Multi-Hop Research Agent</span>
+              <span class="scenario-meta">Web Search ➔ Scraper ➔ Synthesizer (4 Spans)</span>
+            </div>
+          </button>
+          <button class="scenario-btn" data-scenario="refactor">
+            <span class="scenario-icon">⚡</span>
+            <div class="scenario-info">
+              <span class="scenario-title">Codebase Refactor Loop</span>
+              <span class="scenario-meta">AST Grep ➔ Security Policy ➔ Patch ➔ Test (5 Spans)</span>
+            </div>
+          </button>
+          <button class="scenario-btn" data-scenario="resilience">
+            <span class="scenario-icon">🛡️</span>
+            <div class="scenario-info">
+              <span class="scenario-title">Resilient API Recovery</span>
+              <span class="scenario-meta">Timeout ➔ Exponential Backoff ➔ Fallback DB (4 Spans)</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Studio Control Bar -->
+        <div class="studio-controls-bar">
+          <div class="playback-controls">
+            <button class="control-btn" id="btn-play-pause" title="Play / Pause Replay">
+              <span id="play-icon">▶</span>
+            </button>
+            <button class="control-btn" id="btn-step-prev" title="Step Backward">⏮</button>
+            <button class="control-btn" id="btn-step-next" title="Step Forward">⏭</button>
+            <button class="control-btn" id="btn-reset" title="Reset Timeline">↺</button>
+          </div>
+
+          <div class="timeline-scrubber-group">
+            <span class="timeline-label">TIME-TRAVEL:</span>
+            <input type="range" id="time-slider" min="1" max="5" value="5" class="time-range-input" />
+            <span class="step-indicator" id="step-indicator">Step 5 / 5 (Complete)</span>
+          </div>
+
+          <div class="studio-stats-pill">
+            <div class="mini-stat">
+              <span class="stat-label">TOTAL TIME</span>
+              <span class="stat-value" id="stat-total-time">412ms</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="mini-stat">
+              <span class="stat-label">TOKENS</span>
+              <span class="stat-value" id="stat-total-tokens">2,840</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="mini-stat">
+              <span class="stat-label">STATUS</span>
+              <span class="stat-value success" id="stat-overall-status">SUCCESS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Studio Main Split Area -->
+        <div class="studio-workspace">
+          <!-- DAG Graph Visualizer Canvas -->
+          <div class="dag-canvas-container">
+            <div class="canvas-header">
+              <span class="canvas-title">EXECUTION DAG GRAPH</span>
+              <span class="canvas-hint">Click any node to inspect payload</span>
+            </div>
+            <div class="dag-canvas" id="dag-canvas">
+              <!-- SVG Connector Layer -->
+              <svg class="dag-svg-layer" id="dag-svg-layer"></svg>
+              <!-- Interactive Node Container -->
+              <div class="dag-nodes-layer" id="dag-nodes-layer"></div>
+            </div>
+          </div>
+
+          <!-- Node Detail Inspector Drawer -->
+          <div class="inspector-panel" id="inspector-panel">
+            <div class="inspector-header">
+              <div class="inspector-title-group">
+                <span class="inspector-badge" id="insp-type-badge">MCP TOOL CALL</span>
+                <h3 class="inspector-node-name" id="insp-node-name">tools/call: search_web</h3>
+              </div>
+              <span class="inspector-status-badge" id="insp-status-badge">200 OK</span>
+            </div>
+
+            <!-- Inspector Stats Row -->
+            <div class="inspector-metrics-grid">
+              <div class="metric-card">
+                <span class="metric-key">SPAN DURATION</span>
+                <span class="metric-val" id="insp-duration">142ms</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-key">TOKEN COST</span>
+                <span class="metric-val" id="insp-tokens">1,120</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-key">PARENT SPAN</span>
+                <span class="metric-val mono" id="insp-parent">llm_reasoning</span>
+              </div>
+            </div>
+
+            <!-- Payload Viewers -->
+            <div class="payload-section">
+              <div class="payload-tab-header">
+                <span class="payload-label">INPUT ARGUMENTS (JSON)</span>
+                <button class="copy-payload-btn" onclick="copyActivePayload('input')">Copy</button>
+              </div>
+              <pre class="json-code-box"><code id="insp-input-json">{}</code></pre>
+            </div>
+
+            <div class="payload-section">
+              <div class="payload-tab-header">
+                <span class="payload-label">RESULT PAYLOAD (JSON)</span>
+                <button class="copy-payload-btn" onclick="copyActivePayload('output')">Copy</button>
+              </div>
+              <pre class="json-code-box"><code id="insp-output-json">{}</code></pre>
+            </div>
+
+            <!-- Latency Waterfall Breakdown -->
+            <div class="waterfall-section">
+              <span class="payload-label">LATENCY WATERFALL TIMELINE</span>
+              <div class="waterfall-bars" id="waterfall-bars"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="features-container">
+        <div class="section-label">// ARCHITECTURE & PERFORMANCE</div>
+        <h2 class="section-heading">Engineered for Zero-Overhead Telemetry</h2>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-num">01</div>
+            <h3 class="feature-title">Time-Travel Replay</h3>
+            <p class="feature-text">Step backwards and forwards through non-deterministic LLM chains. Isolate exactly which tool invocation corrupted context or caused hallucinations.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-num">02</div>
+            <h3 class="feature-title">Sub-Millisecond Overhead</h3>
+            <p class="feature-text">In-memory ring buffer tracing adds less than 0.02ms latency per tool call. No external cloud dependencies or blocking HTTP egress.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-num">03</div>
+            <h3 class="feature-title">Model Context Protocol Native</h3>
+            <p class="feature-text">Drop-in compatibility with any standard MCP client or server. Works instantly with Claude Desktop, Cursor, and custom JSON-RPC agent loops.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-num">04</div>
+            <h3 class="feature-title">Granular Token Waterfall</h3>
+            <p class="feature-text">Analyze exact prompt vs. completion token burn across every subagent iteration. Detect runaway context growth before it hits API budget limits.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section id="integration" class="integration-section">
+      <div class="integration-container">
+        <div class="section-label">// QUICKSTART & CONFIGURATION</div>
+        <h2 class="section-heading">Plug into Your AI Workflow</h2>
+
+        <div class="config-tabs">
+          <button class="config-tab active" data-tab="cli">CLI Quickstart</button>
+          <button class="config-tab" data-tab="claude">Claude Desktop</button>
+          <button class="config-tab" data-tab="cursor">Cursor IDE</button>
+          <button class="config-tab" data-tab="sdk">Node.js SDK</button>
+        </div>
+
+        <div class="config-code-box">
+          <pre><code id="config-code-content"># 1. Install or launch directly via npx
+npx agent-scope
+
+# 2. Or attach to a running MCP server on custom port
+npx agent-scope --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</code></pre>
+          <button class="copy-btn config-copy" onclick="copyConfigCode()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee Ticker 2 -->
+    <div class="marquee-strip">
+      <div class="marquee-track">
+        <span>AGENT-SCOPE</span>
+        <span class="separator">✦</span>
+        <span>OPEN SOURCE MIT LICENSE</span>
+        <span class="separator">✦</span>
+        <span>BUILT FOR MCP & AUTONOMOUS AGENTS</span>
+        <span class="separator">✦</span>
+        <span>ZERO OVERHEAD TELEMETRY</span>
+        <span class="separator">✦</span>
+        <span>AGENT-SCOPE</span>
+        <span class="separator">✦</span>
+        <span>OPEN SOURCE MIT LICENSE</span>
+        <span class="separator">✦</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="Logo" class="footer-logo" />
+        <span class="footer-brand-title">AGENT-SCOPE</span>
+        <p class="footer-copy">Visual Live Time-Travel Debugger for Model Context Protocol & AI Agents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/bhavukar/agent-scope" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Model Context Protocol</a>
+        <a href="#studio">Live Studio</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Bhavuk Arora. Released under the MIT License.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
