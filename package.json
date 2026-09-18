@@ -1,10 +1,12 @@
 {
-  "name": "agent-scope",
+  "name": "spectra-trace",
   "version": "0.1.0",
   "type": "module",
-  "description": "Visual Live Time-Travel Debugger & DAG Inspector for Model Context Protocol (MCP) & AI Agents",
+  "description": "Visual Live Time-Travel Debugger & Causal DAG Tracing Engine for AI Tool Workflows",
   "main": "dist/index.js",
   "bin": {
+    "spectra": "./bin/agent-scope.js",
+    "spectra-trace": "./bin/agent-scope.js",
     "agent-scope": "./bin/agent-scope.js"
   },
   "scripts": {

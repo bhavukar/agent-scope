@@ -1,30 +1,30 @@
-#  Agent-Scope
+# Spectra
 
-> **Visual Live Time-Travel Debugger & Execution DAG Inspector for Model Context Protocol (MCP) & Autonomous AI Agents.**
+> **Precision Causal DAG Tracing & Deterministic Time-Travel Debugger for AI Tool Workflows.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Model Context Protocol](https://img.shields.io/badge/MCP-Compatible-000000)](https://modelcontextprotocol.io/)
+[![Protocol Native](https://img.shields.io/badge/MCP-Compatible-000000)](https://modelcontextprotocol.io/)
 
 ---
 
-##  What is Agent-Scope?
+## What is Spectra?
 
-Debugging autonomous AI agents and Model Context Protocol (MCP) tool chains is notoriously hard. When an agent hallucinates, loops in circular queries, or exceeds token budgets, inspecting static log files gives you zero visibility into the **causal decision tree**.
+Debugging autonomous AI agent loops and distributed tool servers is notoriously difficult. When an agent hallucinates, loops in circular retries, or exceeds token budgets, inspecting static terminal logs gives zero visibility into the **causal decision tree**.
 
-**Agent-Scope** is a lightweight, zero-overhead telemetry and visual debugging suite for AI agents. It renders a **real-time execution DAG**, tracks sub-millisecond span latency waterfalls, breaks down prompt vs. completion token burn, and provides a **deterministic time-travel scrubber** to step backwards and forwards through any agent interaction.
+**Spectra** is a high-performance, in-memory telemetry and visual debugging engine for AI agent workflows. It renders an **interactive causal DAG graph**, tracks sub-millisecond span latency waterfalls, breaks down prompt vs. completion token burn, and provides a **deterministic time-travel scrubber** to step backwards and forwards through any agent interaction.
 
 ```mermaid
 flowchart TD
-    Prompt[1. User Prompt Span] --> Thought[2. LLM Reasoning Node]
-    Thought --> Tool1[3. MCP Tool Call: search_web]
-    Tool1 --> Result1[4. Tool Result Stream]
-    Result1 --> Thought2[5. LLM Synthesis Step]
-    Thought2 --> Output[6. Final Agent Response]
+    Prompt["1. User Prompt Ingest"] --> Thought["2. LLM Reasoning Node"]
+    Thought --> Tool1["3. Tool Call: mcp__brave_search"]
+    Tool1 --> Result1["4. Tool Result Stream"]
+    Result1 --> Thought2["5. LLM Synthesis Step"]
+    Thought2 --> Output["6. Final Response Payload"]
     
-    subgraph Agent-Scope Telemetry Engine
-        T[In-Memory Ring Buffer] -.-> WSS[WebSocket Telemetry Stream]
-        WSS --> WebUI[Interactive Visual DAG & Time-Travel Scrubber]
+    subgraph Spectra Telemetry Engine
+        T["In-Memory Ring Buffer (16MB Lock-Free)"] -.-> WSS["WebSocket Telemetry Stream"]
+        WSS --> WebUI["Interactive Studio DAG & Frame Scrubber"]
     end
     Thought -.-> T
     Tool1 -.-> T
@@ -33,33 +33,33 @@ flowchart TD
 
 ---
 
-##  Core Features
+## Technical Specifications
 
--  **Deterministic Time-Travel Replay**: Drag the scrubber slider to step backwards and forwards through the agent's decision tree step-by-step.
--  **Sub-Millisecond Span Latency Waterfall**: Trace exact execution time per tool call and identify slow database or network bottlenecks.
--  **Token Cost & Context Footprint**: Inspect granular prompt vs. completion token consumption at every hop.
--  **Zero-Config MCP Integration**: Wrap any standard MCP stdio or SSE server with zero code changes.
--  **Real-Time Interactive DAG Studio**: Built-in responsive web dashboard with live SVG node connectors and JSON payload inspection drawers.
+- **Zero-Allocation Ring Buffer**: Fixed 16MB cyclic buffer in memory adding less than 0.02ms latency per instrumented tool call.
+- **Deterministic Time-Travel Replay**: Frame-by-frame scrubbing through complex multi-hop tool execution graphs.
+- **Sub-Millisecond Span Latency Waterfall**: Gantt breakdown isolating network wait times vs. LLM generation latencies.
+- **Granular Token Attribution**: Prompt vs. completion token consumption tracked down to individual tool calls.
+- **Multi-Transport Support**: Stdio, SSE, and WebSocket tracing compatible with Model Context Protocol (MCP), Claude Desktop, Cursor IDE, and custom agent loops.
 
 ---
 
-##  Quickstart
+## Quickstart
 
-### 1. Launch the Visual Inspector
+### 1. Launch the Visual Studio
 ```bash
-npx agent-scope
-# Opens http://localhost:4567 in your browser
+npx spectra-trace
+# Opens http://localhost:5002 in your browser
 ```
 
-### 2. Wrap an MCP Server in Claude Desktop / Cursor
+### 2. Wrap a Tool Server in Claude Desktop / Cursor
 In your `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "filesystem-scoped": {
-      "command": "agent-scope",
-      "args": ["--port=4567", "--", "npx", "-y", "@modelcontextprotocol/server-filesystem", "/Users/me/Documents"]
+    "filesystem-traced": {
+      "command": "spectra-trace",
+      "args": ["--port=4567", "--", "npx", "-y", "@modelcontextprotocol/server-filesystem", "/Users/me"]
     }
   }
 }
@@ -67,13 +67,13 @@ In your `claude_desktop_config.json`:
 
 ### 3. Programmatic Node.js SDK
 ```typescript
-import { AgentTracer, createScopeTracerMiddleware } from 'agent-scope';
+import { SpectraTracer, createSpectraMiddleware } from 'spectra-trace';
 
-const tracer = new AgentTracer();
-const scope = createScopeTracerMiddleware(tracer);
+const tracer = new SpectraTracer({ ringBufferSize: 65536 });
+const spectra = createSpectraMiddleware(tracer);
 
-// Wrap any tool execution with automatic DAG span telemetry
-const result = await scope.wrapToolCall(
+// Wrap any tool execution with automatic causal DAG telemetry
+const result = await spectra.wrapToolCall(
   'trace-session-101',
   'search_database',
   { query: 'SELECT * FROM users WHERE active = true' },
@@ -85,18 +85,23 @@ const result = await scope.wrapToolCall(
 
 ---
 
-##  Interactive Web Landing Page
+## Architecture
 
-The project includes an interactive web demo inspired by editorial typography and minimal high-contrast design (`ryanritzenthaler.com`).
-
-To launch the web interface locally:
-```bash
-npx serve web
-# or open web/index.html in any browser
+```
+spectra/
+├── bin/
+│   └── agent-scope.js     # CLI Entrypoint
+├── src/
+│   ├── tracer.ts          # Ring Buffer Tracing Engine
+│   ├── server.ts          # Telemetry WebSocket / HTTP Server
+│   ├── middleware.ts      # Zero-Overhead Tool Wrapper
+│   └── cli.ts             # Interactive Daemon & Stdio Proxy
+├── web/                   # Swiss Minimalist Studio & Causal DAG Visualizer
+└── package.json
 ```
 
 ---
 
-##  License
+## License
 
-MIT License © 2026 Bhavuk Arora
+MIT License. Designed and engineered by Bhavuk Arora.

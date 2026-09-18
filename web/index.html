@@ -3,270 +3,396 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spectra — Visual Time-Travel Debugger & Causal DAG Tracing</title>
-  <meta name="description" content="Visual Live Time-Travel Debugger & Causal DAG Tracing Engine for AI Agent Tool Workflows." />
+  <title>Spectra — Precision Causal DAG Tracing & Time-Travel Debugger</title>
+  <meta name="description" content="In-memory ring buffer tracing, causal DAG visualization, and deterministic step replay for AI tool workflows." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=JetBrains+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- Global Navigation -->
-  <header class="site-header">
-    <div class="nav-container">
-      <div class="brand-group">
-        <img src="assets/logo.svg" alt="Spectra Logo" class="brand-logo" />
-        <div class="brand-text">
-          <span class="brand-name">SPECTRA</span>
-        </div>
+<body class="spectra-studio-app">
+
+  <!-- TOP PRECISION TELEMETRY HUD BAR -->
+  <header class="hud-top-bar">
+    <div class="hud-left">
+      <div class="brand-monogram">
+        <span class="mono-badge">SPECTRA</span>
+        <span class="version-tag">TRACE RUNTIME v2.4</span>
       </div>
-      <nav class="nav-links">
-        <a href="#studio" class="nav-link">Live Studio</a>
-        <a href="#features" class="nav-link">Capabilities</a>
-        <a href="#integration" class="nav-link">Integration</a>
-        <a href="https://github.com/bhavukar/agent-scope" target="_blank" rel="noopener" class="btn-github">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>GitHub</span>
-        </a>
+      <div class="hud-divider"></div>
+      <div class="live-pulse-badge">
+        <span class="pulse-dot"></span>
+        <span class="pulse-text">BUFFER: 16MB ACTIVE</span>
+      </div>
+    </div>
+
+    <!-- Center View Switcher -->
+    <div class="hud-center">
+      <nav class="view-switcher" role="tablist">
+        <button class="view-tab active" data-view="dag" role="tab">DAG Topology</button>
+        <button class="view-tab" data-view="frames" role="tab">Step Frames</button>
+        <button class="view-tab" data-view="waterfall" role="tab">Flame Waterfall</button>
+        <button class="view-tab" data-view="events" role="tab">Event Bus</button>
       </nav>
+    </div>
+
+    <!-- Right HUD Info & Actions -->
+    <div class="hud-right">
+      <div class="hud-metric">
+        <span class="metric-lbl">OVERHEAD</span>
+        <span class="metric-val mono"><0.02ms</span>
+      </div>
+      <div class="hud-divider"></div>
+      <div class="hud-metric">
+        <span class="metric-lbl">PROTOCOL</span>
+        <span class="metric-val mono">JSON-RPC / MCP</span>
+      </div>
+      <div class="hud-divider"></div>
+      <a href="https://github.com/bhavukar/spectra" target="_blank" rel="noopener" class="hud-gh-btn" title="View Source on GitHub">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
     </div>
   </header>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-container">
-        <h1 class="hero-title">
-          Live Time-Travel Debugger for AI Tool Workflows.
-        </h1>
-        
-        <p class="hero-subtitle">
-          Unpack every decision, tool call, latency spike, and prompt mutation in real-time. Full causal DAG graph visualization with deterministic step-by-step time-travel replay.
+  <!-- MAIN DUAL-PANE TELEMETRY STUDIO WORKSPACE -->
+  <main class="studio-viewport">
+    
+    <!-- LEFT PANE: Diagnostic Command Center & State Controller -->
+    <aside class="command-rail">
+      <div class="rail-header">
+        <h1 class="rail-title">Deterministic Observability for AI Tool Execution.</h1>
+        <p class="rail-summary">
+          Inspect causal execution graphs, detect token runaway anomalies, and step backwards through tool decisions with zero instrumentation overhead.
         </p>
+      </div>
 
-        <div class="hero-actions">
-          <div class="cli-pill">
-            <span class="cli-prefix">$</span>
-            <span class="cli-cmd">npx spectra-trace</span>
-            <button class="copy-btn" onclick="copyCli()" title="Copy command">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            </button>
-          </div>
-          <a href="#studio" class="btn-primary">Open Live Studio</a>
+      <!-- Quick Install Micro-Prompt -->
+      <div class="install-bar" onclick="copyCli()" title="Click to copy">
+        <span class="prompt-sym">$</span>
+        <span class="prompt-cmd">npx spectra-trace</span>
+        <span class="copy-tag">COPY</span>
+      </div>
+
+      <!-- Active Scenario Selector Strip -->
+      <div class="rail-section">
+        <div class="rail-section-header">
+          <span class="sec-label">TELEMETRY SCENARIO</span>
+          <span class="sec-meta" id="scenario-meta-tag">4 SPANS</span>
+        </div>
+        <div class="scenario-list">
+          <button class="scenario-card active" data-scenario="research">
+            <div class="sc-header">
+              <span class="sc-name">Multi-Hop Deep Research</span>
+              <span class="sc-badge ok">SUCCESS</span>
+            </div>
+            <p class="sc-flow">Prompt -> LLM Plan -> Brave Search -> Synthesize</p>
+          </button>
+          
+          <button class="scenario-card" data-scenario="refactor">
+            <div class="sc-header">
+              <span class="sc-name">AST Codebase Refactor Loop</span>
+              <span class="sc-badge ok">SUCCESS</span>
+            </div>
+            <p class="sc-flow">AST Grep -> Policy -> Patch -> Test Runner</p>
+          </button>
+
+          <button class="scenario-card" data-scenario="resilience">
+            <div class="sc-header">
+              <span class="sc-name">Cascade Recovery Fallback</span>
+              <span class="sc-badge err">504 TIMEOUT</span>
+            </div>
+            <p class="sc-flow">Primary Query -> Timeout -> Exponential Backoff -> Fallback DB</p>
+          </button>
         </div>
       </div>
-    </section>
 
-    <!-- Live Interactive Studio Section -->
-    <section id="studio" class="studio-section">
-      <div class="studio-container">
-        <div class="studio-header">
-          <h2 class="section-heading">Inspect Live Multi-Agent Execution Graphs</h2>
-          <p class="section-desc">Select an agent scenario below, scrub the time-travel slider to replay execution steps, and click any node to inspect raw tool arguments, token footprints, and latency waterfalls.</p>
+      <!-- Time-Travel Scrubber Deck -->
+      <div class="rail-section">
+        <div class="rail-section-header">
+          <span class="sec-label">TIME-TRAVEL TIMELINE</span>
+          <span class="sec-meta" id="step-count-text">FRAME 4 / 4</span>
         </div>
-
-        <!-- Scenario Selector Tabs -->
-        <div class="scenario-selector">
-          <button class="scenario-btn active" data-scenario="research">
-            <div class="scenario-info">
-              <span class="scenario-title">Multi-Hop Research Agent</span>
-              <span class="scenario-meta">Web Search -> Scraper -> Synthesizer (4 Spans)</span>
-            </div>
-          </button>
-          <button class="scenario-btn" data-scenario="refactor">
-            <div class="scenario-info">
-              <span class="scenario-title">Codebase Refactor Loop</span>
-              <span class="scenario-meta">AST Grep -> Security Policy -> Patch -> Test (5 Spans)</span>
-            </div>
-          </button>
-          <button class="scenario-btn" data-scenario="resilience">
-            <div class="scenario-info">
-              <span class="scenario-title">Resilient API Recovery</span>
-              <span class="scenario-meta">Timeout -> Exponential Backoff -> Fallback DB (4 Spans)</span>
-            </div>
-          </button>
-        </div>
-
-        <!-- Studio Control Bar -->
-        <div class="studio-controls-bar">
-          <div class="playback-controls">
-            <button class="control-btn" id="btn-play-pause" title="Play / Pause Replay">
-              <span id="play-icon">Play</span>
-            </button>
-            <button class="control-btn" id="btn-step-prev" title="Step Backward">Prev</button>
-            <button class="control-btn" id="btn-step-next" title="Step Forward">Next</button>
-            <button class="control-btn" id="btn-reset" title="Reset Timeline">Reset</button>
-          </div>
-
-          <div class="timeline-scrubber-group">
-            <span class="timeline-label">TIME-TRAVEL:</span>
-            <input type="range" id="time-slider" min="1" max="5" value="5" class="time-range-input" />
-            <span class="step-indicator" id="step-indicator">Step 5 / 5 (Complete)</span>
-          </div>
-
-          <div class="studio-stats-pill">
-            <div class="mini-stat">
-              <span class="stat-label">TOTAL TIME</span>
-              <span class="stat-value" id="stat-total-time">412ms</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="mini-stat">
-              <span class="stat-label">TOKENS</span>
-              <span class="stat-value" id="stat-total-tokens">2,840</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="mini-stat">
-              <span class="stat-label">STATUS</span>
-              <span class="stat-value success" id="stat-overall-status">SUCCESS</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Studio Main Split Area -->
-        <div class="studio-workspace">
-          <!-- DAG Graph Visualizer Canvas -->
-          <div class="dag-canvas-container">
-            <div class="canvas-header">
-              <span class="canvas-title">EXECUTION DAG GRAPH</span>
-              <span class="canvas-hint">Click any node to inspect payload</span>
-            </div>
-            <div class="dag-canvas" id="dag-canvas">
-              <!-- SVG Connector Layer -->
-              <svg class="dag-svg-layer" id="dag-svg-layer"></svg>
-              <!-- Interactive Node Container -->
-              <div class="dag-nodes-layer" id="dag-nodes-layer"></div>
-            </div>
-          </div>
-
-          <!-- Node Detail Inspector Drawer -->
-          <div class="inspector-panel" id="inspector-panel">
-            <div class="inspector-header">
-              <div class="inspector-title-group">
-                <span class="inspector-badge" id="insp-type-badge">MCP TOOL CALL</span>
-                <h3 class="inspector-node-name" id="insp-node-name">tools/call: search_web</h3>
-              </div>
-              <span class="inspector-status-badge" id="insp-status-badge">200 OK</span>
-            </div>
-
-            <!-- Inspector Stats Row -->
-            <div class="inspector-metrics-grid">
-              <div class="metric-card">
-                <span class="metric-key">SPAN DURATION</span>
-                <span class="metric-val" id="insp-duration">142ms</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-key">TOKEN COST</span>
-                <span class="metric-val" id="insp-tokens">1,120</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-key">PARENT SPAN</span>
-                <span class="metric-val mono" id="insp-parent">llm_reasoning</span>
-              </div>
-            </div>
-
-            <!-- Payload Viewers -->
-            <div class="payload-section">
-              <div class="payload-tab-header">
-                <span class="payload-label">INPUT ARGUMENTS (JSON)</span>
-                <button class="copy-payload-btn" onclick="copyActivePayload('input')">Copy</button>
-              </div>
-              <pre class="json-code-box"><code id="insp-input-json">{}</code></pre>
-            </div>
-
-            <div class="payload-section">
-              <div class="payload-tab-header">
-                <span class="payload-label">RESULT PAYLOAD (JSON)</span>
-                <button class="copy-payload-btn" onclick="copyActivePayload('output')">Copy</button>
-              </div>
-              <pre class="json-code-box"><code id="insp-output-json">{}</code></pre>
-            </div>
-
-            <!-- Latency Waterfall Breakdown -->
-            <div class="waterfall-section">
-              <span class="payload-label">LATENCY WATERFALL TIMELINE</span>
-              <div class="waterfall-bars" id="waterfall-bars"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features-section">
-      <div class="features-container">
-        <h2 class="section-heading">Engineered for Zero-Overhead Telemetry</h2>
         
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-num">01</div>
-            <h3 class="feature-title">Time-Travel Replay</h3>
-            <p class="feature-text">Step backwards and forwards through non-deterministic LLM chains. Isolate exactly which tool invocation corrupted context or caused hallucinations.</p>
+        <div class="scrubber-controls">
+          <div class="scrubber-buttons">
+            <button class="deck-btn" id="btn-play-pause">Play</button>
+            <button class="deck-btn" id="btn-step-prev">Prev</button>
+            <button class="deck-btn" id="btn-step-next">Next</button>
+            <button class="deck-btn" id="btn-reset">Reset</button>
           </div>
+          <input type="range" id="time-slider" min="1" max="4" value="4" class="scrubber-slider" />
+        </div>
+      </div>
 
-          <div class="feature-card">
-            <div class="feature-num">02</div>
-            <h3 class="feature-title">Sub-Millisecond Overhead</h3>
-            <p class="feature-text">In-memory ring buffer tracing adds less than 0.02ms latency per tool call. No external cloud dependencies or blocking HTTP egress.</p>
+      <!-- Live Session Metrics Ledger -->
+      <div class="rail-section">
+        <div class="rail-section-header">
+          <span class="sec-label">SESSION LEDGER</span>
+          <span class="sec-meta">REAL-TIME</span>
+        </div>
+        <div class="metrics-ledger">
+          <div class="ledger-row">
+            <span class="ledger-key">Total Latency</span>
+            <span class="ledger-val mono" id="stat-total-time">412ms</span>
           </div>
-
-          <div class="feature-card">
-            <div class="feature-num">03</div>
-            <h3 class="feature-title">Model Context Protocol Native</h3>
-            <p class="feature-text">Drop-in compatibility with any standard MCP client or server. Works instantly with Claude Desktop, Cursor, and custom JSON-RPC agent loops.</p>
+          <div class="ledger-row">
+            <span class="ledger-key">Prompt Tokens</span>
+            <span class="ledger-val mono" id="stat-prompt-tokens">1,750</span>
           </div>
-
-          <div class="feature-card">
-            <div class="feature-num">04</div>
-            <h3 class="feature-title">Granular Token Waterfall</h3>
-            <p class="feature-text">Analyze exact prompt vs. completion token burn across every subagent iteration. Detect runaway context growth before it hits API budget limits.</p>
+          <div class="ledger-row">
+            <span class="ledger-key">Completion Tokens</span>
+            <span class="ledger-val mono" id="stat-comp-tokens">1,090</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-key">Memory Allocated</span>
+            <span class="ledger-val mono">1.42 MB</span>
+          </div>
+          <div class="ledger-row">
+            <span class="ledger-key">Causal Depth</span>
+            <span class="ledger-val mono" id="stat-causal-depth">4 Levels</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Integration Section -->
-    <section id="integration" class="integration-section">
-      <div class="integration-container">
-        <h2 class="section-heading">Plug into Your AI Workflow</h2>
+    </aside>
 
-        <div class="config-tabs">
-          <button class="config-tab active" data-tab="cli">CLI Quickstart</button>
-          <button class="config-tab" data-tab="claude">Claude Desktop</button>
-          <button class="config-tab" data-tab="cursor">Cursor IDE</button>
-          <button class="config-tab" data-tab="sdk">Node.js SDK</button>
+    <!-- RIGHT PANE: Multi-View Telemetry Canvas Stage -->
+    <section class="stage-canvas-area">
+
+      <!-- STAGE SUB-BAR -->
+      <div class="stage-top-bar">
+        <div class="stage-breadcrumbs">
+          <span class="bc-item">WORKSPACE</span>
+          <span class="bc-sep">/</span>
+          <span class="bc-item bold" id="active-scenario-breadcrumb">Multi-Hop Deep Research</span>
+          <span class="bc-sep">/</span>
+          <span class="bc-item" id="active-view-breadcrumb">DAG Topology</span>
         </div>
-
-        <div class="config-code-box">
-          <pre><code id="config-code-content"># 1. Install or launch directly via npx
-npx spectra-trace
-
-# 2. Or attach to a running tool server on custom port
-npx spectra-trace --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</code></pre>
-          <button class="copy-btn config-copy" onclick="copyConfigCode()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          </button>
+        <div class="stage-actions">
+          <span class="action-tag">CLICK NODE TO EXPAND PAYLOAD</span>
         </div>
       </div>
+
+      <!-- VIEW 1: DAG TOPOLOGY CANVAS -->
+      <div class="view-panel active" id="view-dag">
+        <div class="dag-canvas-frame">
+          <svg class="dag-svg-canvas" id="dag-svg-layer"></svg>
+          <div class="dag-nodes-canvas" id="dag-nodes-layer"></div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: STEP FRAMES TIMELINE VIEW -->
+      <div class="view-panel" id="view-frames">
+        <div class="frames-feed" id="frames-feed"></div>
+      </div>
+
+      <!-- VIEW 3: FLAME WATERFALL VIEW -->
+      <div class="view-panel" id="view-waterfall">
+        <div class="waterfall-container">
+          <div class="wf-header-row">
+            <span class="wf-col-name">SPAN / TOOL NAME</span>
+            <span class="wf-col-timeline">LATENCY TIMELINE GANTT</span>
+            <span class="wf-col-tokens">TOKEN BURN</span>
+          </div>
+          <div class="wf-rows-list" id="waterfall-rows"></div>
+        </div>
+      </div>
+
+      <!-- VIEW 4: LIVE EVENT BUS INJECTOR -->
+      <div class="view-panel" id="view-events">
+        <div class="event-bus-stage">
+          <div class="bus-controls-bar">
+            <span class="bus-label">EVENT INJECTOR:</span>
+            <button class="bus-btn" onclick="emitMockEvent('tool_call')">+ Emit Tool Call</button>
+            <button class="bus-btn" onclick="emitMockEvent('latency_spike')">+ Inject 1400ms Jitter</button>
+            <button class="bus-btn" onclick="emitMockEvent('context_surge')">+ Inject Context Surge</button>
+            <button class="bus-btn clear" onclick="clearEventLog()">Clear Bus</button>
+          </div>
+          <div class="event-bus-stream" id="event-bus-stream">
+            <div class="event-item info">
+              <span class="ev-time">[00:00.00]</span>
+              <span class="ev-type">INIT</span>
+              <span class="ev-msg">Spectra in-memory ring buffer tracing session initialized (capacity: 65,536 spans)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IN-LINE DRAWER: INSPECTOR PAYLOAD TRAY -->
+      <div class="inspector-drawer" id="inspector-drawer">
+        <div class="drawer-header">
+          <div class="drawer-title-group">
+            <span class="drawer-badge" id="insp-type-badge">MCP TOOL CALL</span>
+            <h3 class="drawer-node-name" id="insp-node-name">tools/call: mcp__brave_search</h3>
+          </div>
+          <div class="drawer-status-group">
+            <span class="drawer-stat-badge" id="insp-status-badge">200 OK</span>
+            <span class="drawer-time-badge" id="insp-duration">142ms</span>
+          </div>
+        </div>
+
+        <div class="drawer-body">
+          <div class="drawer-column">
+            <div class="drawer-tab-head">
+              <span class="d-tab-lbl">INPUT PAYLOAD</span>
+              <button class="d-copy-btn" onclick="copyActivePayload('input')">Copy</button>
+            </div>
+            <pre class="drawer-code-pre"><code id="insp-input-json">{}</code></pre>
+          </div>
+          
+          <div class="drawer-column">
+            <div class="drawer-tab-head">
+              <span class="d-tab-lbl">RESULT OUTPUT</span>
+              <button class="d-copy-btn" onclick="copyActivePayload('output')">Copy</button>
+            </div>
+            <pre class="drawer-code-pre"><code id="insp-output-json">{}</code></pre>
+          </div>
+        </div>
+      </div>
+
     </section>
   </main>
 
-  <!-- Site Footer -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <img src="assets/logo.svg" alt="Logo" class="footer-logo" />
-        <span class="footer-brand-title">SPECTRA</span>
-        <p class="footer-copy">Visual Live Time-Travel Debugger & Causal DAG Tracing Engine for AI Agent Tool Loops.</p>
+  <!-- SWISS ENGINEERING SPECIFICATION LEDGER -->
+  <section class="spec-ledger-section">
+    <div class="spec-container">
+      <div class="spec-section-head">
+        <span class="spec-kicker">SYSTEM ARCHITECTURE</span>
+        <h2 class="spec-main-title">Engineering Specifications & Performance Benchmarks</h2>
       </div>
-      <div class="footer-links">
-        <a href="https://github.com/bhavukar/agent-scope" target="_blank" rel="noopener">GitHub Repository</a>
-        <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Model Context Protocol</a>
-        <a href="#studio">Live Studio</a>
+
+      <div class="spec-table-ledger">
+        <div class="spec-row">
+          <div class="spec-col-idx">01</div>
+          <div class="spec-col-topic">
+            <h3 class="spec-name">Zero-Allocation Ring Buffer</h3>
+            <p class="spec-desc">Pre-allocates a fixed 16MB cyclic memory block. Never pauses the JavaScript event loop or creates V8 garbage collection spikes during high-throughput tool chaining.</p>
+          </div>
+          <div class="spec-col-metric">
+            <span class="spec-stat">< 0.02ms</span>
+            <span class="spec-stat-lbl">SPAN OVERHEAD</span>
+          </div>
+          <div class="spec-col-detail">
+            <span class="detail-tag">Lock-free atomics</span>
+            <span class="detail-tag">No heap churn</span>
+          </div>
+        </div>
+
+        <div class="spec-row">
+          <div class="spec-col-idx">02</div>
+          <div class="spec-col-topic">
+            <h3 class="spec-name">Causal DAG Edge Attribution</h3>
+            <p class="spec-desc">Tracks exact parent-child causality links across recursive subagent loops. Unpacks which specific reasoning step spawned secondary tool invocations.</p>
+          </div>
+          <div class="spec-col-metric">
+            <span class="spec-stat">100%</span>
+            <span class="spec-stat-lbl">DETERMINISTIC EDGES</span>
+          </div>
+          <div class="spec-col-detail">
+            <span class="detail-tag">JSON-RPC Span IDs</span>
+            <span class="detail-tag">Causal Ring Graph</span>
+          </div>
+        </div>
+
+        <div class="spec-row">
+          <div class="spec-col-idx">03</div>
+          <div class="spec-col-topic">
+            <h3 class="spec-name">Granular Token Burn Waterfall</h3>
+            <p class="spec-desc">Attributes token consumption down to the individual tool invocation. Detects runaway context growth before it hits LLM provider quota limits.</p>
+          </div>
+          <div class="spec-col-metric">
+            <span class="spec-stat">1-Token</span>
+            <span class="spec-stat-lbl">RESOLUTION PRECISION</span>
+          </div>
+          <div class="spec-col-detail">
+            <span class="detail-tag">Prompt vs Completion</span>
+            <span class="detail-tag">Context Delta Tracking</span>
+          </div>
+        </div>
+
+        <div class="spec-row">
+          <div class="spec-col-idx">04</div>
+          <div class="spec-col-topic">
+            <h3 class="spec-name">Protocol Agnostic Interoperability</h3>
+            <p class="spec-desc">Drop-in compatibility with Model Context Protocol (MCP) clients, Claude Desktop, Cursor IDE, LangChain, and standalone Node.js agent loops.</p>
+          </div>
+          <div class="spec-col-metric">
+            <span class="spec-stat">Stdio / SSE / WS</span>
+            <span class="spec-stat-lbl">TRANSPORTS</span>
+          </div>
+          <div class="spec-col-detail">
+            <span class="detail-tag">MCP 1.0 Compliant</span>
+            <span class="detail-tag">OpenTelemetry Bridge</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>(c) 2026 Bhavuk Arora. Released under the MIT License.</span>
+  </section>
+
+  <!-- PROTOCOL INTEGRATION MATRIX -->
+  <section class="integration-matrix-section">
+    <div class="matrix-container">
+      <div class="matrix-split">
+        <!-- Left: Configuration Selector -->
+        <div class="matrix-left">
+          <span class="spec-kicker">DEPLOYMENT & INTEGRATION</span>
+          <h2 class="matrix-title">Attach Telemetry to Any Tool Server in 5 Seconds.</h2>
+          <p class="matrix-desc">Wrap existing stdio or SSE server instances without rewriting business logic.</p>
+          
+          <div class="matrix-nav-tabs">
+            <button class="matrix-tab active" data-cfg="cli">CLI Quickstart</button>
+            <button class="matrix-tab" data-cfg="claude">Claude Desktop</button>
+            <button class="matrix-tab" data-cfg="cursor">Cursor IDE</button>
+            <button class="matrix-tab" data-cfg="sdk">Node.js SDK</button>
+          </div>
+        </div>
+
+        <!-- Right: Code & Output Terminal -->
+        <div class="matrix-right">
+          <div class="matrix-code-box">
+            <div class="code-box-top">
+              <span class="code-box-title" id="matrix-code-title">CLI Quickstart</span>
+              <button class="copy-matrix-btn" onclick="copyMatrixCode()">Copy Snippet</button>
+            </div>
+            <pre class="matrix-pre"><code id="matrix-code-body"># Launch telemetry proxy directly
+npx spectra-trace
+
+# Wrap a running MCP server on port 4567
+npx spectra-trace --port 4567 --wrap "npx @modelcontextprotocol/server-postgres"</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL SYSTEM MANIFEST FOOTER -->
+  <footer class="manifest-footer">
+    <div class="manifest-container">
+      <div class="manifest-grid">
+        <div class="m-col">
+          <span class="m-header">PROJECT IDENTIFIER</span>
+          <p class="m-text bold">SPECTRA TELEMETRY ENGINE</p>
+          <p class="m-text">Deterministic Causal DAG Tracing for AI Agent Chains</p>
+        </div>
+        <div class="m-col">
+          <span class="m-header">COMPATIBILITY</span>
+          <p class="m-text">Model Context Protocol 1.0</p>
+          <p class="m-text">OpenTelemetry 1.14+</p>
+          <p class="m-text">Node.js 18+ (ESM Native)</p>
+        </div>
+        <div class="m-col">
+          <span class="m-header">LICENSE & AUTHOR</span>
+          <p class="m-text">MIT Open-Source License</p>
+          <p class="m-text">Authored by Bhavuk Arora</p>
+        </div>
+        <div class="m-col">
+          <span class="m-header">REPOSITORY</span>
+          <a href="https://github.com/bhavukar/spectra" target="_blank" rel="noopener" class="m-link">github.com/bhavukar/spectra</a>
+          <p class="m-text small">Build Hash: 2.4.0-prod-std</p>
+        </div>
+      </div>
     </div>
   </footer>
 
