@@ -1221,7 +1221,7 @@ body.spectra-studio-app {
   text-decoration: underline;
 }
 
-/* Responsive adjustments */
+/* Comprehensive Responsive Optimization for Phone & Tablet */
 @media (max-width: 1024px) {
   .studio-viewport {
     flex-direction: column;
@@ -1229,15 +1229,203 @@ body.spectra-studio-app {
   .command-rail {
     width: 100%;
     min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
   }
   .spec-row {
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 50px 1.5fr 1fr;
+    gap: 1.5rem;
+  }
+  .spec-col-detail {
+    grid-column: 2 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   .matrix-split {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   .manifest-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hud-top-bar {
+    height: auto;
+    padding: 0.6rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .hud-left {
+    flex: 1;
+    justify-content: flex-start;
+  }
+
+  .hud-right {
+    order: 2;
+    gap: 0.6rem;
+  }
+
+  .hud-metric {
+    display: none;
+  }
+
+  .hud-divider {
+    display: none;
+  }
+
+  .hud-center {
+    width: 100%;
+    order: 3;
+  }
+
+  .view-switcher {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: flex-start;
+    padding: 3px;
+  }
+
+  .view-switcher::-webkit-scrollbar {
+    display: none;
+  }
+
+  .view-tab {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    font-size: 0.74rem;
+    white-space: nowrap;
+  }
+
+  .command-rail {
+    padding: 1.25rem 1rem;
+    gap: 1.25rem;
+  }
+
+  .rail-title {
+    font-size: 1.25rem;
+  }
+
+  .deck-btn {
+    padding: 8px 0;
+    font-size: 0.78rem;
+  }
+
+  .stage-top-bar {
+    padding: 0.6rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .dag-canvas-frame {
+    min-height: 400px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dag-svg-canvas,
+  .dag-nodes-canvas {
+    min-width: 620px;
+    min-height: 400px;
+  }
+
+  .frames-feed {
+    padding: 1rem;
+  }
+
+  .waterfall-container {
+    padding: 1rem;
+  }
+
+  .wf-header-row,
+  .wf-row {
+    grid-template-columns: 110px 1fr 80px;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .wf-name {
+    padding-right: 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .wf-tokens {
+    font-size: 0.65rem;
+  }
+
+  .event-bus-stage {
+    padding: 1rem;
+  }
+
+  .bus-controls-bar {
+    gap: 0.4rem;
+  }
+
+  .bus-btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .inspector-drawer {
+    padding: 1rem;
+  }
+
+  .drawer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .drawer-body {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .spec-ledger-section,
+  .integration-matrix-section {
+    padding: 3.5rem 1rem;
+  }
+
+  .spec-main-title {
+    font-size: 1.6rem;
+  }
+
+  .spec-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.5rem 0;
+  }
+
+  .spec-col-idx {
+    font-size: 1.25rem;
+  }
+
+  .spec-stat {
+    font-size: 1.4rem;
+  }
+
+  .matrix-title {
+    font-size: 1.45rem;
+  }
+
+  .manifest-footer {
+    padding: 3rem 1rem 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .manifest-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
